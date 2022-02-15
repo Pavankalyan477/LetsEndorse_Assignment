@@ -1,14 +1,33 @@
 import React from "react";
+import { useState } from "react";
 import "./style.css";
 
 export default function Location() {
+    const [establish,setEstablish] = useState("");
+    const [Area, setArea] = useState("");
+    const Establishment=()=>{
+        let establishment_type= document.getElementById("Establishment").value;
+        let business_locality = document.getElementById(" business_locality").value
+        let infra_ownership = document.getElementById("infra_ownership").value;
+        let city = document.getElementById("city").value;
+        setEstablish(`The ${establishment_type} is located in ${business_locality} area of ${city} in a ${infra_ownership} property.`)
+    }
+
+    const Established_Area =()=>{
+        let  establishment_area = document.getElementById("establishment_area").value
+        if(Number(establishment_area)!==Number(0)){
+        setArea(`The size of the establishment is ${establishment_area} sq.ft.`)
+        }else{
+            setArea("")
+        }
+    }
   return (
     <div className="total">
       <div className="content">
         <div>
           <div>
             10.Establishment type :-
-            <select name="" id="">
+            <select name="" id="Establishment" onChange={Establishment}>
               <option value="Factory">Factory</option>
               <option value="Mill">Mill</option>
               <option value="Stall">Stall</option>
@@ -30,14 +49,14 @@ export default function Location() {
         <div>
           <div>
             11.Name of the area :-
-            <input type="text" name="" id="" placeholder="Name of the Area" />
+            <input type="text" name="" id=" business_locality" placeholder="Name of the Area" onChange={Establishment}/>
           </div>
           <p></p>
         </div>
         <div>
           <div>
             12.Locality of business :-
-            <select name="" id="">
+            <select name="" id="city" onChange={Establishment}>
               <option value="Urban">Urban</option>
               <option value="Rural">Rural</option>
               <option value="Semi-urban">Semi-urban</option>
@@ -49,7 +68,7 @@ export default function Location() {
         <div>
           <div>
             13.Ownership of infrastructure :-
-            <select name="" id="">
+            <select name=""   id="infra_ownership" onChange={Establishment}>
               <option value="Rented">Rented</option>
               <option value="Leased">Leased</option>
               <option value="Self-owned">Self-owned</option>
@@ -61,7 +80,7 @@ export default function Location() {
           <div>
             14.Establishment area (in square feet) (Enter 0 if the establishment
             area is irrelevant) :-
-            <input type="Number" name="" id="" placeholder="Established Area" />
+            <input type="Number" name="" id="establishment_area" placeholder="Established Area" onChange={Established_Area} />
           </div>
           <p></p>
         </div>
@@ -97,10 +116,10 @@ export default function Location() {
       </div>
       <div className="sentence">
         <div>
-          <p>Pavan Kalyan</p>
+          <p>{establish}</p>
         </div>
         <div>
-          <p>Pavan Kalyan</p>
+          <p>{Area}</p>
         </div>
         <div>
           <p>Pavan Kalyan</p>

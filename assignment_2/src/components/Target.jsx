@@ -1,15 +1,31 @@
-import React from "react";
+import { useState ,React} from "react";
 import "./style.css";
 
 export default function Target() {
+    const [market_research, setmarket_research] = useState("")
+    const []
+    const Market=()=>{
+        let market_research = document.getElementById("market_research").value
+        if(market_research!=="Not conducted"){
+        setmarket_research(`${market_research} and the range of products and target market has been identified after that.`)
+      }else{
+        setmarket_research("")
+      }
+    }
+    const Products=()=>{
+        let primary_product_service_offered = document.getElementById("Product").value;
+        let offered_to = document.getElementById("offered_to").value
+        setProduct(`This establishment offers products/services like- ${primary_product_service_offered} to ${offered_to}.`)
+    
+      }
   return (
     <div className="total">
       <div className="content">
         <div>
           <div>
             16.Market search :-
-            <select name="" id="">
-              <option value=" Not conducted"> Not conducted</option>
+            <select name="" id="market_research" onChange={Market}>
+              <option value="Not conducted"> Not conducted</option>
               <option value="Market research has been conducted ">
                 Market research has been conducted{" "}
               </option>
@@ -137,7 +153,7 @@ export default function Target() {
       </div>
       <div className="sentence">
         <div>
-          <p>Pavan Kalyan</p>
+          <p>{market_research}</p>
         </div>
         <div>
           <p>Pavan Kalyan</p>
