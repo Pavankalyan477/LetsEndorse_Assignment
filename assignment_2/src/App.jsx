@@ -1,11 +1,18 @@
-
-import './App.css';
-import Introduction from './components/Introduction';
+import "./App.css";
+import Introduction from "./components/Introduction";
+import Location from "./components/Location";
+import Navbar from "./components/Navbar";
+import Target from "./components/Target";
 
 function App() {
   return (
     <div>
-      <Introduction/>
+      <Navbar />
+      <div className="App">
+        <Introduction />
+        <Location />
+        <Target />
+      </div>
     </div>
   );
 }
