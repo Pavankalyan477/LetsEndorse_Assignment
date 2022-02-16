@@ -4,17 +4,26 @@
 }
 .content{
     width: 50%;
-    height: 550px;
-    background-color: cadetblue;
     align-items: center;
-   margin-left: 10px;
-   
+   margin-left: 12px;
+  
    
 }
 .sentence{
     width: 48%;
-    height: 550px;
-    background-color:darkolivegreen;
+   
+    
     float: right;
-    text-align: center;
+   
+}
+input{
+    height: 35px;
+    border-radius: 5px;
+}
+select{
+    height: 35px;
+    border-radius: 5px
+}option{
+    height: 35px;
+    border-radius: 5px;
 }

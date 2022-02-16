@@ -6,12 +6,12 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="image_tag">
         <img
-          src="https://mir-s3-cdn-cf.behance.net/projects/202/19432621.54b2adad8b7a1.jpg"
+          src="https://www.letsendorse.com/images/letsEndorse-Logo-Black-Transparent.png"
           alt="LetsEndorse"
         />
       </div>
       <div className="title_tag">
-        <h1>LetsEndorse Assignment Form</h1>
+        <h1> Assignment Form</h1>
       </div>
     </nav>
   );

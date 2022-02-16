@@ -9,6 +9,7 @@ function App() {
     <div>
       <Navbar />
       <div className="App">
+        <i> <strong> Please Fill the below form with relavent details </strong></i>
         <Introduction />
         <Location />
         <Target />

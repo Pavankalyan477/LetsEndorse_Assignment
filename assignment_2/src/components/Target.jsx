@@ -1,9 +1,47 @@
 import { useState ,React} from "react";
 import "./style.css";
-
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 export default function Target() {
     const [market_research, setmarket_research] = useState("")
-    const []
+    const [primary,setPrimary] = useState("");
+    const [custumer, setCustumer] = useState("");
+    const [seasonality,setSeasonality] = useState("");
+    const [ compettion, setCompetition] = useState("");
+    const [suppliers,setSuppliers] = useState("");
+    const [marketing_avenues,setMarket]= useState("");
+    const theme = useTheme();
+  const [personName, setPersonName] = useState([]);
+  const [scaleup_potential1, setPersonName1] = useState([]);
+  const [scaleup,setScaleup] = useState("")
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+   
+    setMarket(`Our marketing avenues to reach the targeted customers shall include-${  typeof value === 'string' ? value.split(',') : value}`)
+  };
+  const handleChange1 = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName1(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+    setScaleup(`The various foreseeable avenues of scaling up and growing the business in the foreseeable future include- ${  typeof value === 'string' ? value.split(',') : value}.`)
+  };
     const Market=()=>{
         let market_research = document.getElementById("market_research").value
         if(market_research!=="Not conducted"){
@@ -12,12 +50,63 @@ export default function Target() {
         setmarket_research("")
       }
     }
-    const Products=()=>{
-        let primary_product_service_offered = document.getElementById("Product").value;
-        let offered_to = document.getElementById("offered_to").value
-        setProduct(`This establishment offers products/services like- ${primary_product_service_offered} to ${offered_to}.`)
-    
+    const Primary=()=>{
+        let primary_market = document.getElementById("primary_market").value;
+        setPrimary(`The enterprise shall focus on offering its products/services to ${primary_market} markets. `)
       }
+      const  Customer=()=>{
+        let customers = document.getElementById("customers").value;
+        setCustumer(`Our customers shall include- ${customers}`)
+      }
+      const Seasonality=()=>{
+        let seasonality = document.getElementById("seasonality").value;
+        setSeasonality(`The nature of the business is such that we expect ${seasonality}.`)
+      }
+      const Compettion=()=>{
+        let competition = document.getElementById("compettion").value;
+        setCompetition(`Regarding competition, there are ${competition}.`)
+      }
+      const Suppliers=()=>{
+        let suppliers = document.getElementById("suppliers").value;
+        setSuppliers(`The enterprise shall procure goods/raw materials from ${suppliers}.`)
+      }
+      
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 2.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+const names = [
+  ' Distribution of marketing material (pamphlets/flyers)',
+  'storefront/business branding',
+  'Seasonal discounts and offers',
+  'Cross-promotion',
+  ' Digital Marketing',
+  'Word of mouth ',
+  
+];
+const scaleup_potential=[
+  "increasing the variety of product/service offering",
+   'expanding the current offering to other geographies', 
+   'opening more outlets'
+   , 'growing the scale of operation',
+    'building value-chain integrations',
+   'other allied revenue streams',
+]
+
+function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
   return (
     <div className="total">
       <div className="content">
@@ -36,7 +125,7 @@ export default function Target() {
         <div>
           <div>
             17.Primary market :-
-            <select name="" id="">
+            <select name="" id="primary_market" onChange={Primary}>
               <option value="Local"> Local</option>
               <option value="Regional "> Regional</option>
               <option value="National"> National</option>
@@ -48,14 +137,14 @@ export default function Target() {
         <div>
           <div>
             18.Customers :-
-            <input type="text" placeholder="Customers" />
+            <input type="text" placeholder="Customers" id="customers"  onChange={Customer}/>
           </div>
           <p></p>
         </div>
         <div>
           <div>
             19.Seasons of high sales :-
-            <select name="" id="">
+            <select name="" id="seasonality" onChange={Seasonality}>
               <option value="Consistent sales across all seasons">
                 Consistent sales across all seasons
               </option>
@@ -75,7 +164,7 @@ export default function Target() {
         <div>
           <div>
             20.Competition :-
-            <select name="" id="">
+            <select name="" id="compettion" onChange={Compettion}>
               <option value="No similar goods/service provider in this locality">
                 No similar goods/service provider in this locality
               </option>
@@ -92,7 +181,7 @@ export default function Target() {
         <div>
           <div>
             21.List of Suppliers :-
-            <input type="text" placeholder="Suppliers" />
+            <input type="text" placeholder="Suppliers" id="suppliers" onChange={Suppliers}/>
           </div>
           <p></p>
         </div>
@@ -100,7 +189,29 @@ export default function Target() {
           <div>
             22.Marketing avenues :- <br />
             <div>
-              <input type="checkbox" />{" "}
+            <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-name-label">Select Multiple</InputLabel>
+        <Select
+          labelId="demo-multiple-name-label1"
+          id="demo-multiple-name"
+          multiple
+          value={personName}
+          onChange={handleChange}
+          input={<OutlinedInput label="Name" />}
+          MenuProps={MenuProps}
+        >
+          {names.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, personName, theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+              {/* <input type="checkbox" />{" "}
               <label>
                 {" "}
                 Distribution of marketing material (pamphlets/flyers)
@@ -117,7 +228,7 @@ export default function Target() {
               <input type="checkbox" /> <label> Digital Marketing</label>
               <br />
               <input type="checkbox" /> <label>Word of mouth </label>
-              <br />
+              <br /> */}
             </div>
           </div>
           <p></p>
@@ -126,7 +237,29 @@ export default function Target() {
           <div>
             23.Avenues of scaling up in future :- <br />
             <div>
-              <input type="checkbox" />{" "}
+            <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-name-label">Select Multiple</InputLabel>
+        <Select
+          labelId="demo-multiple-name-label"
+          id="demo-multiple-name"
+          multiple
+          value={scaleup_potential1}
+          onChange={handleChange1}
+          input={<OutlinedInput label="Name" />}
+          MenuProps={MenuProps}
+        >
+          {scaleup_potential.map((scaleup_potential) => (
+            <MenuItem
+              key={scaleup_potential}
+              value={scaleup_potential}
+              style={getStyles(scaleup_potential, scaleup_potential1, theme)}
+            >
+              {scaleup_potential}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+              {/* <input type="checkbox" />{" "}
               <label>increasing the variety of product/service offering</label>{" "}
               <br />
               <input type="checkbox" />{" "}
@@ -145,37 +278,48 @@ export default function Target() {
               <br />
               <input type="checkbox" />{" "}
               <label>other allied revenue streams</label>
-              <br />
+          <br /> */}
             </div>
           </div>
-          <p></p>
+          <p></p> 
         </div>
       </div>
       <div className="sentence">
+        
+        <CssBaseline />
+      <Container maxWidth="sm">
+        <Box  >
         <div>
-          <p>{market_research}</p>
+        <h2>Target</h2>
+          <li>{market_research}  {primary} {custumer} {seasonality} {compettion} {suppliers} {marketing_avenues} {scaleup}</li>
+        </div>
+        </Box>
+
+      </Container>
+        
+        {/* <div>
+          <p>
+            {primary}
+          </p>
         </div>
         <div>
-          <p>Pavan Kalyan</p>
+          <p>{custumer}</p>
         </div>
         <div>
-          <p>Pavan Kalyan</p>
+          <p>{seasonality}</p>
         </div>
         <div>
-          <p>Pavan Kalyan</p>
+          <p>{compettion}</p>
         </div>
         <div>
-          <p>Pavan Kalyan</p>
+          <p>{suppliers}</p>
         </div>
         <div>
-          <p>Pavan Kalyan</p>
+          <p>{marketing_avenues}</p>
         </div>
         <div>
-          <p>Pavan Kalyan</p>
-        </div>
-        <div>
-          <p>Pavan Kalyan</p>
-        </div>
+          <p>{scaleup}</p>
+        </div> */}
       </div>
     </div>
   );

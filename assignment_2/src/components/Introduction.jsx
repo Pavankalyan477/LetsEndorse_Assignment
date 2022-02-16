@@ -1,7 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import "./style.css";
-
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select'; 
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 export default function Introduction() {
   var name = "Pavan Kalyan";
   var business_idea = "Developing Innovation thoughts ";
@@ -15,6 +23,50 @@ export default function Introduction() {
   const [ processed , setProcessed]= useState(null);
   const [relevant , setrelevant]= useState();
   const [skill, setSkill]= useState("");
+  const theme = useTheme();
+  const [personName, setPersonName] = useState([]);
+  const [usp,setUSP]= useState()
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+   
+    setUSP(`The enterprise is uniquely positioned because of its - ${typeof value === 'string' ? value.split(',') : value}`)
+  };
+  function getStyles(name, personName, theme) {
+    return {
+      fontWeight:
+        personName.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }   
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+PaperProps: {
+  style: {
+    maxHeight: ITEM_HEIGHT * 2.5 + ITEM_PADDING_TOP,
+    width: 250,
+  },
+},
+};
+const names = [
+ "the entrepreneur's experience in this field",
+   "innovative product/service, high profit margin",
+    "high growth potential, superior customer support",
+     "quality and affordable products/service",
+      "high demand in the target market (forward linkage)", 
+      "abundant supply of raw materials (backward linkage)",
+       "wide range of products/services",
+        "robust value-chain of the business",
+   "frequency of customer visit",
+
+];
   const business = () => {
     let setbusiness_stage=(document.getElementById("business_state").value);
     setBusinesss(
@@ -160,7 +212,29 @@ export default function Introduction() {
           <div>
             9.Unique Selling Proposition :- <br />
             <div>
-              <input type="checkbox" />{" "}
+            <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-name-label">Select Multiple</InputLabel>
+        <Select
+          labelId="demo-multiple-name-label1"
+          id="demo-multiple-name"
+          multiple
+          value={personName}
+          onChange={handleChange}
+          input={<OutlinedInput label="Name" />}
+          MenuProps={MenuProps}
+        >
+          {names.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, personName, theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+              {/* <input type="checkbox" />{" "}
               <label>The Enterprenuer's experience in this field</label> <br />
               <input type="checkbox" />{" "}
               <label>innovative product/service</label>
@@ -189,18 +263,27 @@ export default function Introduction() {
               <br />
               <input type="checkbox" />{" "}
               <label>frequency of customer visits</label>
-              <br />
+              <br /> */}
             </div>
           </div>
           <p></p>
         </div>
       </div>
       <div className="sentence">
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Box  >
         <div>
-          <p id="bsines">{businesss}</p>
+        <h2>Introduction</h2>
+          <li>{businesss} {age} {product} {servies} {processed} {relevant} {skill} {usp}</li>
+        </div>
+        </Box>
+        </Container>
+        {/* <div>
+          <p id="bsines"></p>
         </div>
         <div>
-          <p id="bsines">{age}</p>
+          <p id="bsines"></p>
         </div>
         <div>
           <p id="bsines">{product}</p>
@@ -218,11 +301,11 @@ export default function Introduction() {
           <p id="bsines">{skill}</p>
         </div>
         <div>
-          <p id="bsines">{}</p>
+          <p id="bsines">{usp}</p>
         </div>
         <div>
           <p id="bsines">{}</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
